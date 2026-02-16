@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Placement Trainer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav id="main-nav" class="navbar">
+        <div class="logo">AI Placement Trainer</div>
+        <div class="nav-links">
+            <a href="#" class="nav-link">Features</a>
+            <a href="#" class="nav-link">Testimonials</a>
+            <a href="#" class="nav-link" id="nav-login">Login</a>
+            <button id="nav-cta" style="width: auto; padding: 0.5rem 1.5rem;">Join Cohort</button>
+        </div>
+    </nav>
+    <div id="app" class="container" style="margin-top: 80px;">
+        <!-- Landing Section -->
+        <div id="landing-section" class="landing-section animate-fade">
+            <h1 class="hero-title">Master Your Next<br>AI Interview</h1>
+            <p class="hero-subtitle">The ultimate placement trainer powered by LangGraph and ChromaDB memory. Experience
+                realistic interviews tailored to your career goals.</p>
+            <div class="cta-group">
+                <button id="get-started-btn" style="width: 200px;">Get Started Free</button>
+                <button class="btn-secondary" style="width: 200px;">View Demo</button>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card glass animate-fade delay-1">
+                    <div class="feature-icon">🧠</div>
+                    <h3>AI Memory</h3>
+                    <p style="color: var(--text-muted); margin-top: 1rem;">Persistent context across sessions using
+                        ChromaDB vector storage.</p>
+                </div>
+                <div class="feature-card glass animate-fade delay-2">
+                    <div class="feature-icon">⛓️</div>
+                    <h3>Smart Flows</h3>
+                    <p style="color: var(--text-muted); margin-top: 1rem;">Dynamic interview paths powered by LangGraph
+                        orchestration.</p>
+                </div>
+                <div class="feature-card glass animate-fade delay-2">
+                    <div class="feature-icon">📊</div>
+                    <h3>Deep Analysis</h3>
+                    <p style="color: var(--text-muted); margin-top: 1rem;">Comprehensive feedback on your performance
+                        with actionable insights.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Auth Section -->
+        <div id="auth-section" class="auth-card glass animate-fade" style="display: none;">
+            <h2 id="auth-title">Welcome Back</h2>
+            <p id="auth-subtitle" style="margin-bottom: 2rem;">Sign in to continue your training</p>
+            <form id="auth-form">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="email" id="email" placeholder="Email (for signup only)" style="display: none;">
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit" id="auth-submit">Login</button>
+            </form>
+            <p style="margin-top: 1.5rem;">
+                <span id="auth-toggle-text">Don't have an account?</span>
+                <a href="#" id="auth-toggle"
+                    style="color: var(--primary); text-decoration: none; font-weight: 600;">Sign Up</a>
+            </p>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboard-section" class="animate-fade" style="display: none;">
+            <div class="header">
+                <h1>Your Training Dashboard</h1>
+                <button id="logout-btn"
+                    style="width: auto; padding: 0.5rem 1rem; background: rgba(255,59,59,0.1); color: #ff3b3b; border: 1px solid rgba(255,59,59,0.2);">Logout</button>
+            </div>
+
+            <div class="glass" style="padding: 2rem; margin-bottom: 2rem;">
+                <h3>Start New Session</h3>
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <input type="text" id="new-topic" placeholder="Role/Topic (e.g. Python Developer)"
+                        style="margin: 0;">
+                    <select id="new-difficulty" class="glass"
+                        style="background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--glass-border); border-radius: 8px; padding: 0.5rem 1rem;">
+                        <option value="Entry Level">Entry Level</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                    </select>
+                    <button id="create-session-btn" style="width: auto;">Start Interview</button>
+                </div>
+            </div>
+
+            <h2>Recent Sessions</h2>
+            <div id="sessions-grid" class="grid" style="margin-top: 1.5rem;">
+                <!-- Sessions will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Chat Section -->
+        <div id="chat-section" class="chat-container glass animate-fade" style="display: none;">
+            <div class="header" style="padding: 1.5rem; border-bottom: 1px solid var(--glass-border);">
+                <div>
+                    <h2 id="chat-topic">Technical Interview</h2>
+                    <p id="chat-status" style="color: var(--text-muted);">Session in progress...</p>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <button id="end-interview-btn"
+                        style="width: auto; padding: 0.5rem 1rem; background: rgba(255,255,255,0.1);">End &
+                        Analyze</button>
+                    <button id="back-to-dashboard"
+                        style="width: auto; padding: 0.5rem 1rem; background: rgba(255,255,255,0.1);">Dashboard</button>
+                </div>
+            </div>
+            <div id="chat-history" class="chat-history">
+                <!-- Messages will be loaded here -->
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type your response..." style="margin: 0;">
+                <button id="send-msg-btn" style="width: auto; padding: 0 2rem;">Send</button>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results-section" class="animate-fade" style="display: none;">
+            <div class="header">
+                <h1>Interview Performance</h1>
+                <button id="results-back-btn" style="width: auto;">Back to Dashboard</button>
+            </div>
+            <div id="results-content" class="grid">
+                <!-- Analysis will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
